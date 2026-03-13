@@ -11,6 +11,7 @@ The app works, but it has limitations. Your job is to extend it.
 ## Setup
 
 ### Prerequisites
+
 - Docker and Docker Compose
 - just (command runner) — install via `brew install just` or `cargo install just`
 
@@ -21,23 +22,29 @@ That's it. Everything else runs inside containers.
 1. Clone this repository
 
 2. Run the setup command:
+
 ```
 just setup
 ```
-   This copies `.env.example` to `.env` and builds the Docker images.
+
+This copies `.env.example` to `.env` and builds the Docker images.
 
 3. Add your Anthropic API key to `.env`:
+
 ```
 ANTHROPIC_API_KEY=your_key_here
 ```
-   We've provided an API key in the task email. You can also use your own.
+
+We've provided an API key in the task email. You can also use your own.
 
 4. Start everything:
+
 ```
 just dev
 ```
-   This starts PostgreSQL, the FastAPI backend (port 8000), and the React frontend (port 5173).
-   Database migrations run automatically when the backend starts — no separate step needed.
+
+This starts PostgreSQL, the FastAPI backend (port 8000), and the React frontend (port 5173).
+Database migrations run automatically when the backend starts — no separate step needed.
 
 5. Open http://localhost:5173 in your browser.
 
@@ -67,3 +74,7 @@ We've included sample legal documents in `sample-docs/` for testing.
 - `just db-shell` — Open a psql shell
 - `just shell-backend` — Shell into backend container
 - `just logs-backend` — Tail backend logs
+
+## Demo
+
+https://www.loom.com/share/bbb75fae440b408e8bc8603860a981a2
