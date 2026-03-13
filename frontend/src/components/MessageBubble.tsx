@@ -16,10 +16,10 @@ function parseCitations(content: string): Citation[] {
 	const seen = new Set<string>();
 	let match;
 	while ((match = regex.exec(content)) !== null) {
-		const filename = match[1].trim();
-		const page = parseInt(match[2], 10);
+		const filename = match[1]?.trim();
+		const page = parseInt(match[2] ?? "0", 10);
 		const key = `${filename}-${page}`;
-		if (!seen.has(key)) {
+		if (filename && !seen.has(key)) {
 			seen.add(key);
 			citations.push({ filename, page });
 		}
@@ -88,7 +88,9 @@ export function MessageBubble({
 					</div>
 				)}
 				<div className="prose">
-					<Streamdown>{message.content}</Streamdown>
+					<Streamdown>
+						{message.content.replace(/\[📄[^\]]+\]/g, "").trim()}
+					</Streamdown>
 				</div>
 
 				{/* Citation chips */}

@@ -26,7 +26,7 @@ export function ChatSidebar({
 	const [hoveredId, setHoveredId] = useState<string | null>(null);
 
 	return (
-		<div className="flex h-full w-[250px] flex-shrink-0 flex-col border-r border-neutral-200 bg-white">
+		<div className="flex h-full w-[250px] flex-shrink-0 flex-col border-r border-neutral-200 bg-white overflow-hidden">
 			<div className="flex items-center justify-between border-b border-neutral-100 p-3">
 				<span className="text-sm font-semibold text-neutral-700">
 					Chats
@@ -41,8 +41,8 @@ export function ChatSidebar({
 				</Button>
 			</div>
 
-			<ScrollArea className="flex-1">
-				<div className="p-2">
+			<ScrollArea className="flex-1 w-[250px]">
+				<div className="p-2 w-[250px]">
 					{loading && conversations.length === 0 && (
 						<div className="space-y-2 p-2">
 							{[1, 2, 3].map((i) => (
@@ -72,9 +72,8 @@ export function ChatSidebar({
 								exit={{ opacity: 0, height: 0 }}
 								transition={{ duration: 0.15 }}
 							>
-								<button
-									type="button"
-									className={`group flex w-full items-center rounded-lg px-3 py-2.5 text-left transition-colors ${
+								<div
+									className={`flex w-full items-center rounded-lg px-3 py-2.5 cursor-pointer transition-colors ${
 										selectedId === conversation.id
 											? "bg-neutral-100"
 											: "hover:bg-neutral-50"
@@ -96,22 +95,32 @@ export function ChatSidebar({
 										</p>
 									</div>
 
-									<div className="ml-2 w-6 flex-shrink-0">
-										{hoveredId === conversation.id && (
-											<div
-												role="button"
-												className="rounded p-1 text-neutral-400 hover:bg-neutral-200 hover:text-red-500 cursor-pointer"
-												onClick={(e) => {
-													e.stopPropagation();
-													onDelete(conversation.id);
-												}}
-												title="Delete conversation"
-											>
-												<Trash2 className="h-3.5 w-3.5" />
-											</div>
-										)}
+									<div
+										className="ml-2 w-6 flex-shrink-0"
+										style={{
+											opacity:
+												hoveredId === conversation.id
+													? 1
+													: 0,
+											pointerEvents:
+												hoveredId === conversation.id
+													? "auto"
+													: "none",
+										}}
+									>
+										<button
+											type="button"
+											className="rounded p-1 text-neutral-400 hover:bg-neutral-200 hover:text-red-500 cursor-pointer"
+											onClick={(e) => {
+												e.stopPropagation();
+												onDelete(conversation.id);
+											}}
+											title="Delete conversation"
+										>
+											<Trash2 className="h-3.5 w-3.5" />
+										</button>
 									</div>
-								</button>
+								</div>
 							</motion.div>
 						))}
 					</AnimatePresence>

@@ -68,7 +68,7 @@ export function ChatWindow({
 	// Empty conversation - show upload prompt
 	if (messages.length === 0 && !streaming) {
 		return (
-			<div className="flex flex-1 flex-col bg-white">
+			<div className="flex flex-1 flex-col bg-white min-w-0 overflow-hidden">
 				<div className="flex flex-1 items-center justify-center">
 					{documentCount > 0 ? (
 						<div className="text-center">
@@ -92,7 +92,7 @@ export function ChatWindow({
 	}
 
 	return (
-		<div className="flex flex-1 flex-col bg-white">
+		<div className="flex flex-1 flex-col bg-white min-w-0 overflow-hidden">
 			{error && (
 				<div className="mx-4 mt-2 rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">
 					{error}

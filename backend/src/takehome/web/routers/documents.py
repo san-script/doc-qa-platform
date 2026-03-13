@@ -83,7 +83,7 @@ async def upload_document_endpoint(
     try:
         document = await upload_document(session, conversation_id, file)
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+         raise HTTPException(status_code=400, detail=str(e)) from e
 
     logger.info(
         "Document uploaded",

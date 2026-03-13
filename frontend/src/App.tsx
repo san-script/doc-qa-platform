@@ -59,7 +59,7 @@ export default function App() {
 	}, [create]);
 
 	const handleCitationClick = useCallback(
-		(documentId: string, page: number) => {
+		(documentId: string, _page: number) => {
 			setActiveDocumentId(documentId);
 			// page jumping will be handled by DocumentViewer
 		},

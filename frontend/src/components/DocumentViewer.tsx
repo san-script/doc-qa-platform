@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, FileText, Loader2, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Loader2 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import { Document as PDFDocument, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -78,15 +78,7 @@ export function DocumentViewer({
 	const pdfPageWidth = width - 48;
 
 	if (documents.length === 0) {
-		return (
-			<div
-				style={{ width }}
-				className="flex h-full flex-shrink-0 flex-col items-center justify-center border-l border-neutral-200 bg-neutral-50"
-			>
-				<FileText className="mb-3 h-10 w-10 text-neutral-300" />
-				<p className="text-sm text-neutral-400">No document uploaded</p>
-			</div>
-		);
+		return null;
 	}
 
 	return (
@@ -197,7 +189,9 @@ export function DocumentViewer({
 						size="icon"
 						className="h-7 w-7"
 						disabled={currentPage <= 1}
-						onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+						onClick={() =>
+							setCurrentPage((p) => Math.max(1, p - 1))
+						}
 					>
 						<ChevronLeft className="h-4 w-4" />
 					</Button>
@@ -209,7 +203,9 @@ export function DocumentViewer({
 						size="icon"
 						className="h-7 w-7"
 						disabled={currentPage >= numPages}
-						onClick={() => setCurrentPage((p) => Math.min(numPages, p + 1))}
+						onClick={() =>
+							setCurrentPage((p) => Math.min(numPages, p + 1))
+						}
 					>
 						<ChevronRight className="h-4 w-4" />
 					</Button>
